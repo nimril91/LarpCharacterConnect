@@ -9,9 +9,7 @@
               <AvatarImage :src="currentCharacter.image" :alt="currentCharacter.name" />
               <AvatarFallback class="bg-accent text-accent-foreground">{{ currentCharacter.name[0] }}</AvatarFallback>
             </AvatarRoot>
-            <span class="text-sm">
-              Playing as: <span class="font-bold">{{ currentCharacter.name }}</span>
-            </span>
+            <span class="text-sm"><span class="font-bold">{{ currentCharacter.name }}</span></span>
           </li>
           <li>
             <RouterLink to="/character-select" class="text-accent-foreground hover:underline">
