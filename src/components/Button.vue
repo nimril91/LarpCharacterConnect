@@ -44,6 +44,7 @@ const buttonClasses = {
     secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
     ghost: "hover:bg-accent hover:text-accent-foreground",
     link: "text-primary underline-offset-4 hover:underline",
+    close: "text-gray-500 hover:text-gray-700"
   },
   sizes: {
     default: "h-10 px-4 py-2",

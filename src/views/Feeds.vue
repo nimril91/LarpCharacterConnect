@@ -5,7 +5,7 @@
       
     <GenericDialog :options="dialogOptions" @save="handleSave" headline="Add Feed">
       <template #trigger>
-        <button class="btn-secondary">Say something</button>
+        <Button class="btn-primary">Say something</Button>
       </template>
     </GenericDialog>
       <Card v-for="feed in filteredFeeds" :key="feed.id" class="mb-4 fantasy-border">
@@ -45,6 +45,7 @@ import Card from '@/components/Card.vue';
 import { AvatarRoot, AvatarImage, AvatarFallback, ScrollAreaRoot } from "radix-vue";
 import Badge from '@/components/Badge.vue';
 import GenericDialog from '@/components/GenericDialog.vue';
+import Button from '@/components/Button.vue';
 
 const characterStore = useCharacterStore();
 const { currentCharacter } = characterStore;
