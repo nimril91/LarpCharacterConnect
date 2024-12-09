@@ -33,7 +33,9 @@ const getFeedsFromLocalStorage = () => {
   let storedFeeds = JSON.parse(localStorage.getItem('feeds') || '[]');
   if(storedFeeds.length == 0) {
     storedFeeds = defaultFeeds.map((defaultFeed: FeedType) => new Feed(defaultFeed));
-}
+  } else {
+    storedFeeds = storedFeeds.map((storedFeed: FeedType) => new Feed(storedFeed));
+  }
   return storedFeeds;
 }
 

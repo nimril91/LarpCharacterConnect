@@ -2,6 +2,12 @@
   <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold mb-6 text-primary">Tavern Tales and Town Crier's Calls</h1>
     <ScrollAreaRoot class="h-[calc(100vh-200px)] pr-4">
+      
+    <GenericDialog :options="dialogOptions" @save="handleSave" headline="Add Feed">
+      <template #trigger>
+        <button class="btn-secondary">Say something</button>
+      </template>
+    </GenericDialog>
       <Card v-for="feed in filteredFeeds" :key="feed.id" class="mb-4 fantasy-border">
         <template #header>
             <div class="flex items-center space-x-4">
@@ -33,14 +39,15 @@
 
 <script setup>
 import { computed } from 'vue';
-// import { useCharacterStore } from '../stores/CharacterStore';
+import { useCharacterStore } from '../stores/CharacterStore';
 import { useFeedsStore } from '../stores/FeedsStore';
 import Card from '@/components/Card.vue';
 import { AvatarRoot, AvatarImage, AvatarFallback, ScrollAreaRoot } from "radix-vue";
 import Badge from '@/components/Badge.vue';
+import GenericDialog from '@/components/GenericDialog.vue';
 
-// const characterStore = useCharacterStore();
-// const { currentCharacter } = characterStore;
+const characterStore = useCharacterStore();
+const { currentCharacter } = characterStore;
 
 const feedsStore = useFeedsStore();
 const { getFeedsByTarget } = feedsStore;
@@ -55,4 +62,18 @@ const filteredFeeds = computed(() => {
   // }
   return getFeedsByTarget('general');
 });
+
+const dialogOptions = [
+  { key: 'content', type: 'textarea', default: '' },
+  { key: 'target', type: 'text', default: 'general' },
+  { key: 'event', type: 'text', default: '' }
+];
+
+const handleSave = (data) => {
+  const newFeed = {
+    senderId: currentCharacter.id,
+    ...data
+  };
+  feedsStore.addFeed(newFeed);
+};
 </script>
