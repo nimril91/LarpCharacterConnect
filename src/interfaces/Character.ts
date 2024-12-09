@@ -1,4 +1,3 @@
-
 export interface Character {
   id: number;
   name: string;
@@ -6,7 +5,7 @@ export interface Character {
   class: string;
   image: string;
   shortDescription: string;
-  contacts: string[];
+  contacts: (string | number)[];
   events: string[];
   characteristics: {
     age: string;

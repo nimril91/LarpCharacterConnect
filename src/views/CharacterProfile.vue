@@ -55,7 +55,14 @@
             <div>
               <h3 class="text-xl font-semibold mb-2">Contacts</h3>
               <div class="flex flex-wrap gap-2">
-                <Badge v-for="(contact, index) in currentCharacter.contacts" :key="index" variant="secondary">{{ contact }}</Badge>
+                <Badge v-for="(contact, index) in currentCharacter.linkedContacts" :key="index" variant="secondary">
+                  <template v-if="typeof contact === 'object'">
+                    <router-link :to="{ name: 'CharacterProfile', params: { id: contact.id } }">{{ contact.name }}</router-link>
+                  </template>
+                  <template v-else>
+                    {{ contact }}
+                  </template>
+                </Badge>
               </div>
             </div>
             <div>
@@ -80,11 +87,10 @@ import { useRoute } from 'vue-router';
 
 const characterStore = useCharacterStore();
 const route = useRoute();
-const characterId = route.params.id;
 
 const currentCharacter = computed(() => {
-  if (characterId) {
-    return characterStore.characters.find(character => character.id == characterId) || characterStore.currentCharacter;
+  if (route.params.id) {
+    return characterStore.characters.find(character => character.id == route.params.id) || characterStore.currentCharacter;
   }
   return characterStore.currentCharacter;
 });

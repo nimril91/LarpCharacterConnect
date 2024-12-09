@@ -28,17 +28,24 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { computed } from 'vue';
 import { AvatarRoot, AvatarImage, AvatarFallback } from "radix-vue";
 import Card from '@/components/Card.vue';
 import Button from '@/components/Button.vue';
 import { useCharacterStore } from '../stores/CharacterStore';
+import { usePlayerStore } from '@/stores/PlayerStore';
 
 const characterStore = useCharacterStore();
-const { characters, selectCharacter } = characterStore;
+const playerStore = usePlayerStore();
+const { selectCharacter } = characterStore;
 const router = useRouter();
 
+const characters = computed(() => {
+  return playerStore.currentPlayer.characters;
+});
+
 const handleSelectCharacter = (character) => {
-  selectCharacter(character);
+  selectCharacter(character.id);
   router.push('/feeds');
 };
 </script>

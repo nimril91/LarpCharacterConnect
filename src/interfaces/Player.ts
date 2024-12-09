@@ -1,4 +1,3 @@
-
 import type { Character } from '@/interfaces/Character';
 
 export interface Player {

@@ -6,11 +6,11 @@
         <template #header>
             <div class="flex items-center space-x-4">
               <AvatarRoot class="w-8 h-8 border-2 border-accent">
-                <AvatarImage src="/placeholder.svg" :alt="feed.sender" />
-                <AvatarFallback>{{ feed.sender[0] }}</AvatarFallback>
+                <AvatarImage :src="feed.sender.image ?? '/placeholder.svg'" :alt="feed.sender.name" />
+                <AvatarFallback>Unkown Sender</AvatarFallback>
               </AvatarRoot>
               <div>
-              <h3 class="text-2xl font-semibold leading-none tracking-tight text-lg">{{ feed.sender }}</h3>
+              <h3 class="text-2xl font-semibold leading-none tracking-tight text-lg">{{ feed.sender.name }}</h3>
                 <p class="text-sm text-muted-foreground">{{ feed.timestamp }}</p>
               </div>
             </div>
@@ -33,46 +33,26 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useCharacterStore } from '../stores/CharacterStore';
+// import { useCharacterStore } from '../stores/CharacterStore';
+import { useFeedsStore } from '../stores/FeedsStore';
 import Card from '@/components/Card.vue';
 import { AvatarRoot, AvatarImage, AvatarFallback, ScrollAreaRoot } from "radix-vue";
 import Badge from '@/components/Badge.vue';
 
-const characterStore = useCharacterStore();
-const { currentCharacter } = characterStore;
+// const characterStore = useCharacterStore();
+// const { currentCharacter } = characterStore;
 
-const feeds = [
-  {
-    id: 1,
-    sender: "Elara Moonwhisper",
-    content: "Greetings, fellow adventurers! The Whispering Woods are teeming with magical energy. Exercise caution on your journeys.",
-    timestamp: "2 hours ago",
-    target: "general",
-    event: null,
-  },
-  {
-    id: 2,
-    sender: "Grimlock Ironheart",
-    content: "Attention all warriors! The annual Tournament of Blades will commence next full moon. Sharpen your skills and your swords!",
-    timestamp: "1 day ago",
-    target: "Warriors Guild",
-    event: "Tournament of Blades",
-  },
-  {
-    id: 3,
-    sender: "Zephyr Stormborn",
-    content: "To my esteemed colleagues in the Mages' Circle: Our next gathering to discuss the anomalies in the ether will be held at the Crystal Tower.",
-    timestamp: "3 days ago",
-    target: "Mages' Circle",
-    event: "Ether Anomalies Discussion",
-  },
-];
+const feedsStore = useFeedsStore();
+const { getFeedsByTarget } = feedsStore;
 
-const isRelevantMessage = (message) => {
-  if (message.target === "general") return true;
-  if (currentCharacter.value && (message.target === currentCharacter.value.class || message.target === currentCharacter.value.race)) return true;
-  return false;
-};
-
-const filteredFeeds = computed(() => feeds.filter(isRelevantMessage));
+const filteredFeeds = computed(() => {
+  // if (currentCharacter.value) {
+  //   return [
+  //     ...getFeedsByTarget('general'),
+  //     ...getFeedsByTarget(currentCharacter.value.class),
+  //     ...getFeedsByTarget(currentCharacter.value.race)
+  //   ];
+  // }
+  return getFeedsByTarget('general');
+});
 </script>

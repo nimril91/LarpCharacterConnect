@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia';
-import type { Character } from '@/interfaces/Character';
+import { Character } from '@/classes/CharacterClass';
+import type { Character as CharacterType } from '@/interfaces/Character';
 
-const defaultCharacters: Character[] = [
+const defaultCharacters: CharacterType[] = [
   {
     id: 1,
     name: "Elara Moonwhisper",
@@ -9,7 +10,7 @@ const defaultCharacters: Character[] = [
     class: "Ranger",
     image: "/placeholder.svg",
     shortDescription: "A skilled elven ranger with a deep connection to nature.",
-    contacts: ["Thorin Oakenshield", "Galadriel"],
+    contacts: [2, "Galadriel"],
     events: ["Battle of the Five Armies", "Council of Elrond"],
     characteristics: {
       age: "247 years",
@@ -30,7 +31,7 @@ const defaultCharacters: Character[] = [
     class: "Warrior",
     image: "/placeholder.svg",
     shortDescription: "A stout dwarven warrior with an unbreakable spirit.",
-    contacts: ["Borin Stonefist", "Durin Hammerhand"],
+    contacts: [1, "Durin Hammerhand"],
     events: ["Siege of Ironforge", "Battle of the Black Mountain"],
     characteristics: {
       age: "132 years",
@@ -64,17 +65,123 @@ const defaultCharacters: Character[] = [
     titles: ["Master of the Arcane", "Stormcaller"],
     affiliations: ["Mage's Guild", "Order of the Storm"],
     about: "Zephyr Stormborn is a prodigious human mage with a natural talent for elemental magic. From a young age, he displayed an affinity for controlling the elements, earning him the title of Stormcaller. His dedication to mastering the arcane arts has made him a key figure in the Mage's Guild and a powerful ally in times of conflict."
+  },
+  {
+    id: 4,
+    name: "Lyria Starfire",
+    race: "Elf",
+    class: "Sorceress",
+    image: "/placeholder.svg",
+    shortDescription: "A mystical elven sorceress with a command over the stars.",
+    contacts: ["Eldrin Moonshadow", "Thalindra Brightspear"],
+    events: ["Celestial Convergence", "War of the Ancients"],
+    characteristics: {
+      age: "315 years",
+      height: "5'9\"",
+      eyeColor: "Silver",
+      hairColor: "Golden",
+      distinguishingFeatures: "Star-shaped birthmark on forehead"
+    },
+    talents: ["Star magic", "Enchanting", "Divination"],
+    titles: ["Starcaller", "Keeper of the Celestial Tome"],
+    affiliations: ["Celestial Order", "Elven Council"],
+    about: "Lyria Starfire is a mystical elven sorceress known for her command over the stars. Her deep knowledge of celestial magic has made her a revered figure among the elves and a powerful force in the realm."
+  },
+  {
+    id: 5,
+    name: "Thorin Stonehelm",
+    race: "Dwarf",
+    class: "Paladin",
+    image: "/placeholder.svg",
+    shortDescription: "A noble dwarven paladin with a heart of gold.",
+    contacts: ["Gimli Ironfoot", "Balin Stonefist"],
+    events: ["Defense of the Sacred Mountain", "Crusade of Light"],
+    characteristics: {
+      age: "150 years",
+      height: "4'8\"",
+      eyeColor: "Blue",
+      hairColor: "Red",
+      distinguishingFeatures: "Golden armor with intricate engravings"
+    },
+    talents: ["Holy magic", "Swordsmanship", "Leadership"],
+    titles: ["Protector of the Sacred Mountain", "Champion of Light"],
+    affiliations: ["Order of the Golden Shield", "Dwarven Paladins"],
+    about: "Thorin Stonehelm is a noble dwarven paladin known for his unwavering dedication to justice and his heart of gold. His holy magic and combat prowess make him a beacon of hope in dark times."
+  },
+  {
+    id: 6,
+    name: "Aria Windrider",
+    race: "Human",
+    class: "Bard",
+    image: "/placeholder.svg",
+    shortDescription: "A charismatic human bard with a gift for storytelling.",
+    contacts: ["Lysandra Nightingale", "Dorian Silverstring"],
+    events: ["Festival of Songs", "Rebellion of the Free Folk"],
+    characteristics: {
+      age: "25 years",
+      height: "5'6\"",
+      eyeColor: "Green",
+      hairColor: "Brown",
+      distinguishingFeatures: "Lute with intricate carvings"
+    },
+    talents: ["Music", "Storytelling", "Persuasion"],
+    titles: ["Voice of the Free Folk", "Minstrel of the Realm"],
+    affiliations: ["Bard's College", "Free Folk"],
+    about: "Aria Windrider is a charismatic human bard known for her gift of storytelling and her enchanting music. Her songs inspire courage and hope, making her a beloved figure among the people."
+  },
+  {
+    id: 7,
+    name: "Kael Firebrand",
+    race: "Orc",
+    class: "Shaman",
+    image: "/placeholder.svg",
+    shortDescription: "A fierce orc shaman with a deep connection to the elements.",
+    contacts: ["Gorak Bloodfist", "Shara Stormcaller"],
+    events: ["Ritual of the Ancestors", "Battle of the Burning Plains"],
+    characteristics: {
+      age: "40 years",
+      height: "6'5\"",
+      eyeColor: "Amber",
+      hairColor: "Black",
+      distinguishingFeatures: "Tribal tattoos covering arms"
+    },
+    talents: ["Elemental magic", "Healing", "Spirit communication"],
+    titles: ["Spirit Walker", "Keeper of the Ancestral Flame"],
+    affiliations: ["Orcish Shamans", "Tribe of the Burning Plains"],
+    about: "Kael Firebrand is a fierce orc shaman known for his deep connection to the elements and his powerful magic. His wisdom and strength make him a respected leader among his tribe."
+  },
+  {
+    id: 8,
+    name: "Seraphina Lightbringer",
+    race: "Human",
+    class: "Cleric",
+    image: "/placeholder.svg",
+    shortDescription: "A devoted human cleric with a gift for healing.",
+    contacts: ["Brother Alden", "Sister Miriam"],
+    events: ["Plague of Shadows", "Siege of the Holy City"],
+    characteristics: {
+      age: "32 years",
+      height: "5'7\"",
+      eyeColor: "Hazel",
+      hairColor: "Auburn",
+      distinguishingFeatures: "Holy symbol tattoo on right wrist"
+    },
+    talents: ["Healing magic", "Exorcism", "Herbalism"],
+    titles: ["Lightbringer", "Healer of the Holy City"],
+    affiliations: ["Order of the Light", "Healers of the Holy City"],
+    about: "Seraphina Lightbringer is a devoted human cleric known for her gift of healing and her unwavering faith. Her compassion and dedication to helping others have made her a revered figure in the Holy City."
   }
 ];
 
 const getCharactersFromLocalStorage = () => {
   const storedCharacters = localStorage.getItem('characters');
-  return storedCharacters ? JSON.parse(storedCharacters) as Character[] : defaultCharacters;
+  return storedCharacters ? JSON.parse(storedCharacters).map((char: any) => new Character(char)) : defaultCharacters.map(char => new Character(char));
 }
 
 const getCurrentCharacterFromLocalStorage = () => {
-  const storedCharacter = localStorage.getItem('currentCharacter');
-  return storedCharacter ? JSON.parse(storedCharacter) as Character : null;
+  const storedCharacterID = localStorage.getItem('currentCharacterID');
+  const characters = getCharactersFromLocalStorage();
+  return characters.find((character: CharacterType) => character.id === Number(storedCharacterID)) || null;
 }
 
 export const useCharacterStore = defineStore('character', {
@@ -85,13 +192,13 @@ export const useCharacterStore = defineStore('character', {
   }),
 
   actions: {
-    selectCharacter(character: Character) {
-      this.currentCharacter = character;
-      localStorage.setItem('currentCharacter', JSON.stringify(character));
+    selectCharacter(characterID: number) {
+      this.currentCharacter = this.characters.find(character => character.id === characterID) || null;
+      localStorage.setItem('currentCharacterID', characterID.toString());
     },
 
     addCharacter(character: Omit<Character, 'id'>) {
-      const newCharacter: Character = { ...character, id: Date.now() };
+      const newCharacter: Character = new Character({ ...character, id: Date.now() });
       const updatedCharacters = [...this.characters, newCharacter];
       this.characters = updatedCharacters;
       localStorage.setItem('characters', JSON.stringify(updatedCharacters));
